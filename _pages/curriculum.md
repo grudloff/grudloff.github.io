@@ -6,4 +6,4 @@ permalink: /curriculum/
 author_profile: TRUE
 ---
 
-<embed src="assets/documents/cv_gabriel-rudloff.pdf" type="application/pdf" />
+<embed src="../assets/documents/cv_gabriel-rudloff.pdf" type="application/pdf" />
