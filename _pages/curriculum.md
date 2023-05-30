@@ -1,0 +1,5 @@
+---
+permalink: /curriculum/
+title: "About"
+---
+
