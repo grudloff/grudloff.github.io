@@ -60,7 +60,7 @@ author:
   bio    : "M.S. Electronic Engineering &#124; Data Scientist &#124; ML Researcher &#124; IoT Enthusiast"
   links:
     - label: "LinkedIn"
-      icon: "fas fa-fw fa-linkedin"
+      icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/gabriel-rudloff/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -69,7 +69,7 @@ author:
 footer:
   links:
     - label: "LinkedIn"
-      icon: "fas fa-fw fa-linkedin"
+      icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/gabriel-rudloff/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
