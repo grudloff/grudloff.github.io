@@ -58,6 +58,8 @@ author:
   name   : "Gabriel Rudloff"
   avatar : "/assets/images/cvgrudloff.jpg"
   bio    : "M.S. Electronic Engineering &#124; Data Scientist &#124; ML Researcher &#124; IoT Enthusiast"
+  location : Concón, Chile
+  email : gabriel.rudloff@gmail.com
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
