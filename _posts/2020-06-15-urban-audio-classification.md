@@ -4,7 +4,6 @@ categories:
   - Blog
 tags:
   - link
-  - Post Formats
 link: https://github.com/grudloff/Salamon2017Replication
 ---
 
