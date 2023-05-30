@@ -60,13 +60,15 @@ author:
   bio    : "M.S. Electronic Engineering &#124; Data Scientist &#124; ML Researcher &#124; IoT Enthusiast"
   location : Concón, Chile
   email : gabriel.rudloff@gmail.com
-  links:
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/gabriel-rudloff/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://https://github.com/grudloff"
+  linkedin : gabriel-rudloff
+  github : grudloff
+#   links:
+#     - label: "LinkedIn"
+#       icon: "fab fa-fw fa-linkedin"
+#       url: "https://www.linkedin.com/in/gabriel-rudloff/"
+#     - label: "GitHub"
+#       icon: "fab fa-fw fa-github"
+#       url: "https://https://github.com/grudloff"
 
 footer:
   links:
