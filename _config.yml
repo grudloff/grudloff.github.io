@@ -56,7 +56,7 @@ plugins:
 
 author:
   name   : "Gabriel Rudloff Barison"
-  avatar : "/assets/images/cvgrudloff_bn.jpg"
+  avatar : "/assets/images/cvgrudloff.jpg"
   bio    : "M.S. Electronic Engineering \| Data Scientist \| ML Engineer \| IoT Enthusiast"
   links:
     - label: "LinkedIn"
