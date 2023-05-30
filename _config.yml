@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: About
+title: Gabriel Rudloff Barison
 email: gabriel.rudloff@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   About page & portfolio for Gabriel Rudloff Barison.
@@ -55,7 +55,7 @@ plugins:
   - jekyll-include-cache
 
 author:
-  name   : "Gabriel Rudloff Barison"
+  name   : "Gabriel Rudloff"
   avatar : "/assets/images/cvgrudloff.jpg"
   bio    : "M.S. Electronic Engineering &#124; Data Scientist &#124; ML Engineer &#124; IoT Enthusiast"
   links:
