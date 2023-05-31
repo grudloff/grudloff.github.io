@@ -5,6 +5,12 @@ header:
   image: /assets/images/header.jpg
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+Data scientist with a strong foundation in electronic engineering and a focus on machine learning research. I hold a Bachelor's and Master's degree in Electronic Engineering, complemented by hands-on experience through internships in development engineering and software development. During my internships, I gained valuable insights into IoT and contributed to an open-source machine learning Python repository.
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+My master's focused in machine learning and advanced signal processing, with my research in the application of deep learning to fiber optic sensors (FBG and DAS). I possess a solid understanding of deep learing, classical machine learning and computer vision techniques, further bolstered by my interest in neuroscience.
+
+Proficient in a wide range of data science Python packages, including NumPy, Pandas, Scikit-learn, and Pytorch (also in Tensorflow but I rather use Pytorch), I leverage these tools to preprocess and analyze complex datasets and build predictive or clasification models. With experience in data visualization using libraries such as Matplotlib and Seaborn, I am adept at presenting insights in a clear and compelling manner.
+
+Driven by curiosity and a thirst for knowledge, I consistently seek opportunities to expand my skills and stay updated with the latest advancements in the field. With a strong analytical mindset, attention to detail, and an obsesive minset for solving complex problems.
+
+I am now eager to apply my research abilities and practical experience to contribute to meaningfull projects as a data scientist!
