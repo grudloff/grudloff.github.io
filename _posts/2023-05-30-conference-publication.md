@@ -8,4 +8,4 @@ link: https://doi.org/10.1117/12.2679924
 ---
 
 
-An unsupervised approach for obtaining the spectral positions of spectrally-overlapped fiber optic sensors.
+Conference paper presenting an unsupervised approach for obtaining the spectral positions of spectrally-overlapped fiber Bragg grattings (a type of fiber optic sensor).
