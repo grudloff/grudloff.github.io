@@ -103,6 +103,12 @@ defaults:
       header:
         image: /assets/images/header_small_bn.jpg
 
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-EYQW2NPWGE"
+    anonymize_ip: false # default
+
 category_archive:
   type: liquid
   path: /categories/
