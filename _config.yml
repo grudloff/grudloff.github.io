@@ -102,6 +102,11 @@ defaults:
       author_profile: true
       header:
         image: /assets/images/header_small_bn.jpg
+        
+social:
+  links:
+    - "https://www.linkedin.com/in/gabriel-rudloff/"
+    - "https://github.com/grudloff"
 
 analytics:
   provider: "google-gtag"
