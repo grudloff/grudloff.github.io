@@ -107,7 +107,7 @@ social:
   links:
     - "https://www.linkedin.com/in/gabriel-rudloff/"
     - "https://github.com/grudloff"
-
+    
 analytics:
   provider: "google-gtag"
   google:
