@@ -109,7 +109,7 @@ social:
     - "https://github.com/grudloff"
     
 analytics:
-  provider: "google-gtag"
+  provider: "google"
   google:
     tracking_id: "G-EYQW2NPWGE"
 
