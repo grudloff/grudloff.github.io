@@ -112,6 +112,7 @@ analytics:
   provider: "google-gtag"
   google:
     tracking_id: "G-EYQW2NPWGE"
+    anonymize_ip: true
 
 category_archive:
   type: liquid
