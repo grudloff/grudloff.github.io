@@ -92,7 +92,7 @@ defaults:
       share: true
       related: true
       header:
-        image: /assets/images/header_small_bn.jpg
+        image: /assets/images/header_small.jpg
   # _pages
   - scope:
       path: "_pages"
@@ -101,7 +101,7 @@ defaults:
       layout: single
       author_profile: true
       header:
-        image: /assets/images/header_small_bn.jpg
+        image: /assets/images/header_small.jpg
         
 social:
   links:
