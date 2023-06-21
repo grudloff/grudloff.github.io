@@ -8,4 +8,4 @@ header:
     image: /assets/images/header_small_bn.jpg
 ---
 
-<embed src="../assets/documents/cv_gabriel-rudloff.pdf" type="application/pdf" />
+<embed src="../assets/documents/cv_gabriel-rudloff.pdf" type="application/pdf" width="100%" height="600px"/>
