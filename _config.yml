@@ -58,7 +58,8 @@ author:
   name   : "Gabriel Rudloff"
   avatar : "/assets/images/cvgrudloff.jpg"
   bio    : "Data Scientist &#124; ML Researcher &#124;\n IoT Enthusiast"
-  location : Concón, Chile
+  # location : Concón, Chile
+  location : Barcelona, Spain
   email : gabriel.rudloff@gmail.com
   linkedin : gabriel-rudloff
   github : grudloff
