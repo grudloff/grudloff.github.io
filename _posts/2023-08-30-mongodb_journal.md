@@ -229,11 +229,12 @@ By carefully managing session state variables and using Streamlit's `st.experime
 
 Select your forked repository from the dropdown list, the name of the main (that in this case is 'journal.py'), and the URL you want for the webapp.
 
+Then select "Advanced settings", and then input the 'uri' of your atlas cluster.
+
 Click the "Deploy" button.
 
 Streamlit Sharing will automatically pull the code from your GitHub repository, set up the environment based on the requirements.txt file, and run your app. Once the deployment process is complete, you'll receive a URL that you can share with others to access your personal journal app.
 
-Then select "Advanced settings", and then input the 'uri' of your atlas cluster.
 
 ## Conclusion
 
