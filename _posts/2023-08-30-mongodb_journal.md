@@ -48,7 +48,7 @@ In your Python app code, you can use the `pymongo` library to establish a connec
 
 ```python
 from pymongo.mongo_client import MongoClient
-uri = "mongodb+srv://gabrielrudloff:<password>@stoned-parrot.nazmopu.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://<user>:<password>@<cluster>.<server>.mongodb.net/?retryWrites=true&w=majority"
 # Create a new client and connect to the server
 client = MongoClient(uri)
 # Send a ping to confirm a successful connection
