@@ -1,5 +1,5 @@
 ---
-title: "Crafting Reflection: Building a Personal Journal App with MongoDB and Streamlit"
+title: "Building a Personal Journal App with MongoDB and Streamlit"
 categories:
   - Blog
 ---
