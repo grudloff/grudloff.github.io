@@ -2,7 +2,6 @@
 title: "Crafting Reflection: Building a Personal Journal App with MongoDB and Streamlit"
 categories:
   - Blog
-description: "Dive into the journey of creating a user-friendly personal journal app using MongoDB and Streamlit. Explore seamless entry management and discover the power of self-expression through code. Fork the GitHub repository to embark on your own journaling adventure."
 ---
 
 In today's digital age, maintaining a personal journal has evolved from the traditional pen-and-paper approach to digital solutions that offer convenience and accessibility. Creating a custom personal journal app can be an exciting and rewarding endeavor, allowing you to combine modern technologies to capture your thoughts and experiences. In this blog post, we'll delve into the development journey of crafting a personal journal app using MongoDB and Streamlit.
