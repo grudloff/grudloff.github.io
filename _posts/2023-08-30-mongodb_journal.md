@@ -221,6 +221,20 @@ else:
 
 By carefully managing session state variables and using Streamlit's `st.experimental_rerun()` function, we've achieved a smooth transition between viewing and modifying journal entries. This user-friendly design ensures that users can seamlessly edit their entries without confusion. The next section will conclude our journey by summarizing the development process and highlighting key takeaways.
 
+##  Deploy to Streamlit Community Cloud
+1. Fork the [github repository](https://github.com/grudloff/Journal).
+1. Visit the [Streamlit Community Cloud](https://streamlit.io/cloud).
+2. Sign in with your GitHub account.
+3. Click on the "New app" button.
+
+Select your forked repository from the dropdown list, the name of the main (that in this case is 'journal.py'), and the URL you want for the webapp.
+
+Click the "Deploy" button.
+
+Streamlit Sharing will automatically pull the code from your GitHub repository, set up the environment based on the requirements.txt file, and run your app. Once the deployment process is complete, you'll receive a URL that you can share with others to access your personal journal app.
+
+Then select "Advanced settings", and then input the 'uri' of your atlas cluster.
+
 ## Conclusion
 
 The security of storing information on your own MongoDB cluster adds a crucial layer of protection to the sensitive and personal data captured in the journal app. With the data residing within your controlled environment, you mitigate potential risks associated with third-party data breaches and unauthorized access. This approach enables you to establish and enforce your security protocols, ensuring that your users' private thoughts and reflections remain confidential.
