@@ -3,6 +3,7 @@ permalink: /about/
 title: "About"
 header:
   image: /assets/images/header.jpg
+  height: 50%
 ---
 
 Data scientist with a strong foundation in electronic engineering and a focus on machine learning research. I hold a Bachelor's and Master's degree in Electronic Engineering, complemented by hands-on experience through internships in development engineering and software development. During my internships, I gained valuable insights into IoT and contributed to an open-source machine learning Python repository.
