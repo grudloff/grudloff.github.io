@@ -136,7 +136,7 @@ In the above code:
 
 - The `client.journal_entries.entries.insert_one` method inserts the new entry along with the date into the MongoDB collection.
 -  After insertion, we clear the cache for `get_data` and use `st.experimental_rerun()` to refresh the UI and show the newly added entry.
-  NOTE: The cached function `get_data` is used to get previous entries and will be described in the following section.
+--- The cached function `get_data` is used to get previous entries and will be described in the following section.
 
 ## Modify Entries
 
