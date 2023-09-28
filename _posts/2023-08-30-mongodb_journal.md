@@ -146,6 +146,23 @@ In the Modify Entries section, we'll delve into how users can edit their existin
 Before we dive into modifications, let's briefly revisit how the previous journal entries are displayed. We utilize MongoDB to fetch a set of entries based on user preferences, including the start and end dates and the number of entries to show.
 
 ```python
+@st.cache_data(ttl=600)
+def get_data(num_entries, start_date, end_date):
+    start_date = datetime.combine(start_date, datetime.max.time())
+    end_date = datetime.combine(end_date, datetime.min.time())
+    try:
+        items = client.journal_entries.entries.find(
+            {"date": {"$gte": end_date, "$lte": start_date}},
+            limit=num_entries,
+        )
+        items = list(items)
+
+    except Exception as e:
+        st.warning("Failed to load from MongoDB collection.")
+        st.error(repr(e))
+        items = []
+    return items
+
 # Sidebar to filter by date
 st.sidebar.subheader("Filter by date")
 # ... date input controls ...
