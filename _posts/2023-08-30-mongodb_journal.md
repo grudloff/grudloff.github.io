@@ -59,7 +59,6 @@ except Exception as e:
 ```
 
 With this connection established, you're ready to interact with your MongoDB Atlas cluster using the `pymongo` library. Running this code is a good way to test that all the setting up was done correctly. 
-Absolutely, let's start with the section on Streamlit, caching, and securing connection information. I'll provide explanations along with code snippets to illustrate the concepts.
 
 ---
 
@@ -148,12 +147,12 @@ Before we dive into modifications, let's briefly revisit how the previous journa
 
 ```python
 @st.cache_data(ttl=600)
-def get_data(num_entries, start_date, end_date):
-    start_date = datetime.combine(start_date, datetime.max.time())
+def get_data(num_entries, _date, end_date):
+    _date = datetime.combine(_date, datetime.max.time())
     end_date = datetime.combine(end_date, datetime.min.time())
     try:
         items = client.journal_entries.entries.find(
-            {"date": {"$gte": end_date, "$lte": start_date}},
+            {"date": {"$gte": end_date, "$lte": _date}},
             limit=num_entries,
         )
         items = list(items)
@@ -174,7 +173,7 @@ st.sidebar.subheader("Number of entries")
 
 # Fetch and display previous entries
 st.subheader("Previous Entries")
-items = get_data(num_entries, start_date, end_date)
+items = get_data(num_entries, _date, end_date)
 for item in items:
     # ... display entry ...
     modify = st.button("Modify", key="modify_"+repr(item["_id"]),
@@ -186,7 +185,7 @@ for item in items:
 
 ### Enabling Modification
 
-When a user clicks the "Modify" button, we need to transition from the regular view mode to the modification mode. We achieve this by setting session state variables that indicate the modification process has started. This allows us to differentiate between the two modes and adjust the UI accordingly.
+When a user clicks the "Modify" button, we need to transition from the regular view mode to the modification mode. We achieve this by setting session state variables that indicate the modification process has ed. This allows us to differentiate between the two modes and adjust the UI accordingly.
 
 ```python
 if not st.session_state.get("modifying", False):
