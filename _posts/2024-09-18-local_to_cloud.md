@@ -1,5 +1,6 @@
 ---
 title: "ML Inference on GCP: From Local to Cloud"
+excerpt: "Explore the journey of deploying machine learning models from local environments to cloud platforms. This guide covers FastAPI local deployment, Docker containerization, and various Google Cloud Vertex AI deployment options, helping you choose the right abstraction level for your ML project."
 categories:
   - Blog
 ---
@@ -22,13 +23,13 @@ We'll explore three key stages in this journey:
 2. Containerizing the FastAPI Server with Docker.
 3. Deploying on Google Cloud AI Platform with various abstraction levels.
 
-# 3. Level 1: Local Deployment with FastAPI (Low-Level Abstraction)
+# 3. Level 1: Local Deployment with FastAPI
 
 The first step is to deploy your ML model locally using FastAPI, a modern, fast (high-performance) web framework for Python. This low-level approach gives you full control over the prediction logic but requires manually implementing all the server logic. It's a good starting point for testing and development but would not be appropriate for production deployments as this does not provide scalability or fault tolerance.
 
-> **Note**: In this article, we will not cover the training of the machine learning model. However, for demonstration purposes, we will be using an [XGBoost model](https://xgboost.readthedocs.io/en/stable/) trained on the classic [Iris dataset](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html). The complete training process can be found in the Jupyter Notebook linked at the end of this article.
+> **Note**: In this article, we will not cover the training of the machine learning model. However, for demonstration purposes, we will be using an [XGBoost model](https://xgboost.readthedocs.io/en/stable/) trained on the classic [Iris dataset](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html). The complete training process can be found in the Jupyter Notebook linked in [section 7](#7-jupyter-notebook-full-steps-for-each-level).
 
-Assuming you have already installed FastAPI, you now need to create a python script instanteates a FastAPI app, loads the trained model and define the health and prediction routes using the FastAPI decorators syntax. Below is a simple example of a FastAPI app that does this:
+Assuming you have already installed FastAPI, you now need to create a python script that instanteates a FastAPI app, loads the trained model and define the health and prediction routes using the FastAPI decorators syntax. Below is a simple example of a FastAPI app that does this:
 
 ```python
 # app/app.py
@@ -123,7 +124,7 @@ EXPOSE 8000
 
 - The `Dockerfile` specifies the base image as `python:3.10` and copies the FastAPI app and model artifacts to the container. The `requirements.txt` file contains the dependencies needed to run the FastAPI app.
 - The `CMD` instruction specifies the command to run when the container starts, which in this case is `fastapi run`. The `EXPOSE` instruction exposes port 8000, which is the default port used by FastAPI.
-- You can build the Docker image using the `docker build` command and run the container using the `docker run` command.
+- You can then build the Docker image using the `docker build` command and run the container using the `docker run` command.
 
 ### Pros:
 
@@ -141,7 +142,7 @@ The final stage involves moving the model to Vertex AI . This platform allows fo
 
 > **Note:** We could also deploy the model directly to Google Cloud Run, which is a fully managed platform that automatically scales your containerized applications, or use Google Kubernetes Engine. However, using Vertex AI provides convenient features specific to machine learning models, such as model monitoring, explainability, and versioning. Moreover it allows for easy testing through straightforward batch prediction jobs or online prediction endpoints.
 
-Models deployed on Vertex AI are registered in the Model Registry, which allows you to manage and deploy models to endpoints or batch prediction jobs. The following sections will cover the different approaches to deploying models on Vertex AI. Before doing so, the container created in the previous step needs to be available in Artifact Registry.
+Models deployed on Vertex AI are registered in the Model Registry, which allows you to manage and deploy models to endpoints or batch prediction jobs. The following sections will cover the different approaches for this available on Vertex AI.
 
 ## 5.1 Custom Container Deployment
 
@@ -149,7 +150,7 @@ In this scenario, you take the Docker container created in the previous step and
 
 ### Steps:
 
-1. **Push Docker image to Artifact Registry**: Push the docker image to Artifact Registry. For this you need to create a repository in Artifact Registry using the Google SDK command `gcloud artifacts repositories create`. Then push the container by first configuring the Docker client to authenticate with the Artifact Registry using the command `gcloud auth configure-docker`, then adding the tag to the image using `docker tag` and then pushing it using `docker push`.
+1. **Push Docker image to Artifact Registry**: To push the Docker image to Artifact Registry, begin by creating a repository using the Google SDK command `gcloud artifacts repositories create`. Next, configure the Docker client to authenticate with Artifact Registry by running `gcloud auth configure-docker`. Once authenticated, tag your image appropriately using the `docker tag` command, ensuring the tag includes the Artifact Registry location and repository name. Finally, push the tagged image to the repository with the `docker push` command, which will upload your container image to Artifact Registry, making it available for deployment or further use within your Google Cloud environment.
 
 2. **Add to Model Registry**: Model Registry is a service in Vertex AI that allows you to manage your models. Once the model is registered, you can deploy it to an endpoint or start a batch prediction job.
 
@@ -331,7 +332,7 @@ model = aiplatform.Model.upload(
 
 - Less flexibility compared to custom containers or routines.
 - Limited to the model types supported by the prebuilt containers.
-- Debugging may be harder as the implementation details are not accessible.
+- Debugging may be harder as the implementation details are not accessible. Therefore, you will need to rely only on logging and monitoring to debug the model.
 
 # 6. Comparison of Abstraction Levels
 
@@ -369,9 +370,9 @@ While this article focuses on Google Cloud Platform (GCP), it's important to not
 
 The right level of abstraction depends on your specific use case. For instance if you need to customize the prediction logic, you may opt for a custom prediction routine. If you need to deploy a model quickly and don’t require much customization, a prebuilt container may be the best choice.
 
-** Key takeaways:**
-- Even though CPR provide full customization over the prediction logic, debugging may be harder than directly implementing a FastAPI server as the implementation details are offuscated.
+**Key takeaways:**
+- Even though CPR provide full customization over the prediction logic, debugging may be harder than directly implementing a model server as the implementation details are offuscated.
 - Using a prebuilt container requires you to take extra care in ensuring that the model artifacts are compatible with the prebuilt container. However, the prediction output from the prebuilt container has the added benefit of being compatible with other GCP services such as explainability and monitoring.
-- Making the effort of matching your implementation output with the prebuilt container output can be a good idea in the long run. Having said that, there are scenarios in which this may not be possible, for instance due to no prebuilt image matching your library requirements. One example would be when implementing a model that requires a scikit-learn wrapper around an xgboost model
+- Making the effort of matching your implementation output with the prebuilt container output can be a good idea in the long run. Having said that, there are scenarios in which this may not be possible, for instance due to no prebuilt image matching your library requirements. One example would be when implementing a model that requires a scikit-learn wrapper around an xgboost model.
 
 I hope this has been enlightening and that you now have a better understanding of the different levels of abstraction when deploying ML models. If you have any questions or feedback, feel free to reach out!
