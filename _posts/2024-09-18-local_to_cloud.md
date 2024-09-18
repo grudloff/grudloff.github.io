@@ -1,6 +1,6 @@
 ---
 title: "ML Inference on GCP: From Local to Cloud"
-excerpt: "Explore the journey of deploying machine learning models from local environments to cloud platforms. This guide covers FastAPI local deployment, Docker containerization, and various Google Cloud Vertex AI deployment options, helping you choose the right abstraction level for your ML project."
+excerpt: "Explore the journey of deploying machine learning models from local environments to cloud platforms."
 categories:
   - Blog
 ---
