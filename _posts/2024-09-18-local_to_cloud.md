@@ -1,31 +1,34 @@
 ---
 title: "ML Inference on GCP: From Local to Cloud"
-excerpt: "Explore the journey of deploying machine learning models from local environments to cloud platforms."
 categories:
   - Blog
 ---
 
 # 1. Introduction
 
-Deploying machine learning (ML) models in production is a crucial step toward delivering real value from data-driven solutions. As machine learning engineers or data scientists, the ability to make these models available to users through an API or service is essential. However, the process of deploying models can vary depending on the level of abstraction.
+Deploying machine learning (ML) models in production is a crucial step toward delivering real value from data-driven solutions. As machine learning engineers or data scientists, the ability to make these models available to users through an API or service is essential.
 
-In this article, we'll explore the journey from deploying an ML model locally using FastAPI, to containerizing it with Docker, and finally, scaling the deployment using Google Cloud Platform (GCP). Specifically, we’ll dive into Google’s Vertex AI (formerlly known as AI Platform)  and the different  options it provides—from fully managing custom containers to using prebuilt prediction services.
+Major cloud providers offer a range of services to help you deploy your ML models at different levels of abstraction. These services provide managed infrastructure, scalability, and monitoring, allowing you to focus on the model itself rather than the surrounding infrastructure. But these come with their own set of challenges and trade-offs.
+
+Each solution makes it easier to deploy your models than implementing it from scratch, but it comes at the cost of offuscating the actual logic underneath. This can make debugging and monitoring harder, as you have less visibility into the implementation details. Therefore, I believe it is a great exercise to go through the different levels of abstraction when deploying ML models, as it will give you a better understanding of the trade-offs and challenges at each level.
+
+In this article, we'll explore the journey from deploying an ML model locally using FastAPI, to containerizing it with Docker, and finally, scaling the deployment using Google Cloud Platform (GCP). Specifically, we’ll dive into Google’s Vertex AI (formerlly known as AI Platform) and the different options it provides—from fully managing custom containers to using prebuilt prediction services.
 
 # 2. The Journey of ML Model Deployment: From Local to Cloud
 
-The deployment of ML models can be viewed through different lenses of abstraction. The lowest level involves deploying the model directly on your local machine. This gives you full control but comes with its own challenges around scalability and infrastructure management.
+Serving an ML model can be made at different levels of abstraction. The lowest level involves deploying the model directly on your local machine. This gives you full control but comes with the cost of having to implement the server logic and challenges around scalability and infrastructure management.
 
 As you progress up the abstraction ladder, GCP offers solutions that take away much of the complexity, allowing you to focus on the model itself rather than the surrounding infrastructure.
 
 We'll explore three key stages in this journey:
 
 1. Local Deployment with FastAPI.
-2. Containerizing the FastAPI Server with Docker.
+2. Containerizing the model Server with Docker.
 3. Deploying on Google Cloud AI Platform with various abstraction levels.
 
 # 3. Level 1: Local Deployment with FastAPI
 
-The first step is to deploy your ML model locally using FastAPI, a modern, fast (high-performance) web framework for Python. This low-level approach gives you full control over the prediction logic but requires manually implementing all the server logic. It's a good starting point for testing and development but would not be appropriate for production deployments as this does not provide scalability or fault tolerance.
+The first step is to deploy your ML model locally using FastAPI, a modern, fast (high-performance) web framework for Python (Although other alternatives could be used such as Flask or Django). This low-level approach gives you full control over the prediction logic but requires manually implementing all the server logic. It's a good starting point for testing and development but would not be appropriate for production deployments as this does not provide scalability or fault tolerance.
 
 > **Note**: In this article, we will not cover the training of the machine learning model. However, for demonstration purposes, we will be using an [XGBoost model](https://xgboost.readthedocs.io/en/stable/) trained on the classic [Iris dataset](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html). The complete training process can be found in the Jupyter Notebook linked in [section 7](#7-jupyter-notebook-full-steps-for-each-level).
 
@@ -348,7 +351,7 @@ Here’s a quick comparison of the three abstraction levels:
 
 # 7. Jupyter Notebook: Full steps for each level
 
-To help you get started with deploying your ML model, `[here](linktonnoteboko) is a Jupyter Notebook that walks you through all the necessary steps. This notebook covers:
+To help you get started with deploying your ML model, [here](https://github.com/grudloff/grudloff.github.io/blob/master/assets/notebooks/local_to_cloud.ipynb) is a Jupyter Notebook that walks you through all the necessary steps. This notebook covers:
 
 1. Setup
 2. Training the Model
@@ -357,7 +360,7 @@ To help you get started with deploying your ML model, `[here](linktonnoteboko) i
 5. Using the custom container in the cloud
 6. Custom Prediction Routine
 7. Prebuilt Container
-8. Validate prediction results from each alternative
+8. Validate prediction concistency
 9. Clean Up
 
 This notebook provides code snippets, explanations, and commands to help you understand and execute each level described in this article.
