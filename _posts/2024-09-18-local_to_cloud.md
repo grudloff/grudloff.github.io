@@ -157,23 +157,23 @@ In this scenario, you take the Docker container created in the previous step and
 
 2. **Add to Model Registry**: Model Registry is a service in Vertex AI that allows you to manage your models. Once the model is registered, you can deploy it to an endpoint or start a batch prediction job.
 
-To register the model you can use the Python SDK as follows:
+    To register the model you can use the Python SDK as follows:
 
-```python
-from google.cloud import aiplatform
+    ```python
+    from google.cloud import aiplatform
 
-model = aiplatform.Model.upload(
-    project=...,
-    location=...
-    display_name=...,
-    serving_container_image_uri=..., # URI of the Docker image in Artifact Registry
-    serving_container_predict_route="/predictions",
-    serving_container_health_route="/health",
-    serving_container_ports=[8000],
-)
+    model = aiplatform.Model.upload(
+        project=...,
+        location=...
+        display_name=...,
+        serving_container_image_uri=..., # URI of the Docker image in Artifact Registry
+        serving_container_predict_route="/predictions",
+        serving_container_health_route="/health",
+        serving_container_ports=[8000],
+    )
 
-model.wait()
-```
+    model.wait()
+    ```
 
 3. **Test the model**: Once you have registered the model you can test it either by deploying it to an endpoint or by making a batch prediction call to the model. Below is an example of the former:
     
@@ -208,7 +208,7 @@ Vertex AI offers Custom Prediction Routines through the Python SDK. This allows 
 
 ### Steps:
 
-1 **Write a Predictior**: This essentially comes down to defining a "Predictor" class that implements the `preprocess`, `prediction` and `postprocess` functions we previously implemented in the FastAPI app. Below is an example of how you can define a "Predictor" for an XGBoost model:
+1. **Write a Predictior**: This essentially comes down to defining a "Predictor" class that implements the `preprocess`, `prediction` and `postprocess` functions we previously implemented in the FastAPI app. Below is an example of how you can define a "Predictor" for an XGBoost model:
 
 ```python
 # predictor.py
