@@ -1,5 +1,6 @@
 ---
 title: "From Local to Cloud - Mastering ML Model Deployment"
+excerpt: "Explore the journey of deploying machine learning models from local environments to cloud platforms."
 categories:
   - Blog
 ---
