@@ -1,6 +1,6 @@
 ---
 title: "From Local to Cloud - Mastering ML Model Deployment"
-excerpt: "Explore the journey of deploying machine learning models from local environments to cloud platforms."
+excerpt: ""
 categories:
   - Blog
 ---
@@ -148,7 +148,7 @@ The final stage involves moving the model to Vertex AI . This platform allows fo
 
 Using Vertex AI provides convenient features specific to ML models, such as model monitoring, explainability, and versioning. Moreover it allows for easy testing through straightforward batch prediction jobs or online prediction endpoints
 
-Models deployed on Vertex AI are registered in the Model Registry. The following sections will cover the different alternatives available on Vertex AI.
+Models deployed on Vertex AI first need to be registered in the Model Registry, this logically groups all the necessary prerequisites to run the model server, such as the image, the model artifacts and the infrastructure. The following sections will cover the different alternatives available on Vertex AI.
 
 ## 5.1 Custom Container Deployment
 
@@ -245,7 +245,7 @@ Vertex AI offers Custom Prediction Routines through the Python SDK. This allows 
             predictions = prediction_results.tolist()
             return {"predictions": predictions}
     ```
-2. **Instanteate a local model**: Instantiate the Predictor class and test it locally using the following code:
+2. **Instanteate a local model**: Instantiate the Predictor class using the following code:
 
     ```python
     from google.cloud.aiplatform.prediction import LocalModel
@@ -261,22 +261,7 @@ Vertex AI offers Custom Prediction Routines through the Python SDK. This allows 
     ```
     This will create a server using the predictor and containerize it using docker. The `requirements_path` is the path to the requirements file that contains the dependencies needed to run the predictor.
 
-3. **Test it locally**: You can deploy the model locally on docker using the `deploy_to_local_endpoint` method. This will start a local docker container which you can test. This is specially useful for debugging and testing the model before deploying it to Vertex AI. Below is an example of how you can do this:
-    
-    ```python
-    json_request = ... # input data
-    with local_model.deploy_to_local_endpoint(
-    artifact_uri=artifact_local_folder, # You can also use a GCS path here
-    host_port="8000"
-    ) as local_endpoint:
-        predict_response = local_endpoint.predict(
-            request=json_request,
-            headers={"Content-Type": "application/json"},
-            verbose=True,
-    )
-    ```
-
-4. **Test it on Vertex AI**: To test the model on Vertex AI, you will need to push the image to Artifact Registry and then add it to Model Registry. Then you can deploy it, or in this case, run a batch prediction job. Below is an example of how you can do this:
+3. **Test the model**: To test the model on Vertex AI, you will need to push the image to Artifact Registry and then add it to Model Registry. Then you can deploy it, or in this case, run a batch prediction job. Below is an example of how you can do this:
         
     ```python
     local_model.push_image()
@@ -299,7 +284,7 @@ Vertex AI offers Custom Prediction Routines through the Python SDK. This allows 
 
 ### Cons:
 
-- More complex than deploying with prebuilt containers.
+- Requires more effort than deploying with prebuilt containers.
 - Offuscated implementation details which may make debugging harder.
 
 ## 5.3 Using Vertex AI Precition Prebuilt Containers
@@ -396,3 +381,4 @@ I hope this has been enlightening and that you now have a better understanding o
     >**Note**: In case you want to do this in the FastAPI app, you would need to add this to the `app.py` file, as activating logging locally in your notebook would not have any effect.
 - In case of building an image multiple time due to debugging. Use the `--no-cache` flag when building the Docker image to ensure that the latest changes are included in the image. For the CPR you can set this trough the `no_cache` parameter in the `LocalModel.build_cpr_model` method.
 - In case your model is failing in the cloud, you can deploy it locally using the `LocalModel.deploy_to_local_endpoint` method. This will allow you to test the model locally and debug it before deploying it to the cloud. You can check the examples in the Jupyter Notebook for more details on how to do this for each of the alternatives.
+- You can inspect the files in a prebuilt container by running it locally with the above method. Once it is running you can access the container by running `docker exec -it <container_id> /bin/bash`. This will open a shell in the container and you can inspect the files and the environment.
