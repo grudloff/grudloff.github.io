@@ -1,5 +1,5 @@
 ---
-title: "ML Inference on GCP: From Local to Cloud"
+title: "From Local to Cloud - Mastering ML Model Deployment"
 categories:
   - Blog
 ---
@@ -143,9 +143,11 @@ EXPOSE 8000
 
 The final stage involves moving the model to Vertex AI . This platform allows for scalable deployment while taking away much of the complexity of managing the infrastructure. We'll explore three approaches under this section: deploying custom containers, using custom prediction routines, and utilizing prebuilt containers.
 
-> **Note:** We could also deploy the model directly to Google Cloud Run, which is a fully managed platform that automatically scales your containerized applications, or use Google Kubernetes Engine. However, using Vertex AI provides convenient features specific to machine learning models, such as model monitoring, explainability, and versioning. Moreover it allows for easy testing through straightforward batch prediction jobs or online prediction endpoints.
+> **Note:** We could also deploy the model directly to Google Cloud Run, which is a fully managed platform that automatically scales your containerized applications, or use Google Kubernetes Engine.
 
-Models deployed on Vertex AI are registered in the Model Registry, which allows you to manage and deploy models to endpoints or batch prediction jobs. The following sections will cover the different approaches for this available on Vertex AI.
+Using Vertex AI provides convenient features specific to ML models, such as model monitoring, explainability, and versioning. Moreover it allows for easy testing through straightforward batch prediction jobs or online prediction endpoints
+
+Models deployed on Vertex AI are registered in the Model Registry. The following sections will cover the different alternatives available on Vertex AI.
 
 ## 5.1 Custom Container Deployment
 
@@ -189,7 +191,7 @@ In this scenario, you take the Docker container created in the previous step and
 
     batch_prediction_job.wait()
     ```
-This will spin up a GCE instance and run the prediction job, then once finished it will shut down the instance, and therefore you will be charged only for the necessary resources. Note that batch prediction only accept input data from GCS or BigQuery, in this case we are using BigQuery as the source of the input data.
+    This will spin up a GCE instance and run the prediction job, then once finished it will shut down the instance, and therefore you will be charged only for the necessary resources. Note that batch prediction only accept input data from GCS or BigQuery, in this case we are using BigQuery as the source of the input data.
 
 ### Pros:
 
@@ -210,84 +212,84 @@ Vertex AI offers Custom Prediction Routines through the Python SDK. This allows 
 
 1. **Write a Predictior**: This essentially comes down to defining a "Predictor" class that implements the `preprocess`, `prediction` and `postprocess` functions we previously implemented in the FastAPI app. Below is an example of how you can define a "Predictor" for an XGBoost model:
 
-```python
-# predictor.py
-import numpy as np
-from google.cloud.aiplatform.prediction.sklearn.predictor import SklearnPredictor
-from google.cloud.aiplatform.utils import prediction_utils
-import xgboost as xgb
-import os
+    ```python
+    # predictor.py
+    import numpy as np
+    from google.cloud.aiplatform.prediction.sklearn.predictor import SklearnPredictor
+    from google.cloud.aiplatform.utils import prediction_utils
+    import xgboost as xgb
+    import os
 
-class CprPredictor(SklearnPredictor):
-    
-    def __init__(self):
-        return
-    
-    def load(self, artifacts_uri: str):
-        """Loads the preprocessor artifacts."""
-        prediction_utils.download_model_artifacts(artifacts_uri)
+    class CprPredictor(SklearnPredictor):
+        
+        def __init__(self):
+            return
+        
+        def load(self, artifacts_uri: str):
+            """Loads the preprocessor artifacts."""
+            prediction_utils.download_model_artifacts(artifacts_uri)
 
-        self._model = xgb.XGBClassifier()
-        self._model.load_model("model.json")
-    
-    def preprocess(self, prediction_input):
-        instances  = np.asarray(prediction_input["instances"])
-        return np.asarray(instances)
+            self._model = xgb.XGBClassifier()
+            self._model.load_model("model.json")
+        
+        def preprocess(self, prediction_input):
+            instances  = np.asarray(prediction_input["instances"])
+            return np.asarray(instances)
 
-    def predict(self, inputs):
-        prediction_results = self._model.predict(inputs)
-        return prediction_results
-    
-    def postprocess(self, prediction_results):
-        predictions = prediction_results.tolist()
-        return {"predictions": predictions}
-```
+        def predict(self, inputs):
+            prediction_results = self._model.predict(inputs)
+            return prediction_results
+        
+        def postprocess(self, prediction_results):
+            predictions = prediction_results.tolist()
+            return {"predictions": predictions}
+    ```
 2. **Instanteate a local model**: Instantiate the Predictor class and test it locally using the following code:
 
-```python
-from google.cloud.aiplatform.prediction import LocalModel
-from predictor import CprPredictor # This will depend on the path to the predictor file
+    ```python
+    from google.cloud.aiplatform.prediction import LocalModel
+    from predictor import CprPredictor # This will depend on the path to the predictor file
 
-local_model = LocalModel.build_cpr_model(
-    cpr_folder,
-    image_uri,
-    base_image="python:3.10",
-    predictor=CprPredictor,
-    requirements_path=..., # path to the requirements file
-)
-```
-This will create a server using the predictor and containerize it using docker. The `requirements_path` is the path to the requirements file that contains the dependencies needed to run the predictor.
+    local_model = LocalModel.build_cpr_model(
+        cpr_folder,
+        image_uri,
+        base_image="python:3.10",
+        predictor=CprPredictor,
+        requirements_path=..., # path to the requirements file
+    )
+    ```
+    This will create a server using the predictor and containerize it using docker. The `requirements_path` is the path to the requirements file that contains the dependencies needed to run the predictor.
 
 3. **Test it locally**: You can deploy the model locally on docker using the `deploy_to_local_endpoint` method. This will start a local docker container which you can test. This is specially useful for debugging and testing the model before deploying it to Vertex AI. Below is an example of how you can do this:
     
-```python
-json_request = ... # input data
-with local_model.deploy_to_local_endpoint(
-artifact_uri=artifact_local_folder, # You can also use a GCS path here
-host_port="8000"
-) as local_endpoint:
-    predict_response = local_endpoint.predict(
-        request=json_request,
-        headers={"Content-Type": "application/json"},
-        verbose=True,
-)
-```
+    ```python
+    json_request = ... # input data
+    with local_model.deploy_to_local_endpoint(
+    artifact_uri=artifact_local_folder, # You can also use a GCS path here
+    host_port="8000"
+    ) as local_endpoint:
+        predict_response = local_endpoint.predict(
+            request=json_request,
+            headers={"Content-Type": "application/json"},
+            verbose=True,
+    )
+    ```
 
 4. **Test it on Vertex AI**: To test the model on Vertex AI, you will need to push the image to Artifact Registry and then add it to Model Registry. Then you can deploy it, or in this case, run a batch prediction job. Below is an example of how you can do this:
         
-```python
-local_model.push_image()
+    ```python
+    local_model.push_image()
 
-model = aiplatform.Model.upload(
-project=...,
-location=...,
-local_model=local_model,
-display_name=...,
-artifact_uri=bucket_cpr_path # GCS path to the model artifacts (local path is not supported here)
-)
+    model = aiplatform.Model.upload(
+    project=...,
+    location=...,
+    local_model=local_model,
+    display_name=...,
+    artifact_uri=bucket_cpr_path # GCS path to the model artifacts (local path is not supported here)
+    )
 
-... # Run a batch prediction job as previously described
-```
+    ... # Run a batch prediction job as previously described
+    ```
 
 ### Pros:
 
@@ -307,24 +309,26 @@ Each model type (e.g., TensorFlow, scikit-learn) has its own prebuilt container 
 
 ### Steps:
 
-1. **Upload model to Cloud Storage**: Store your trained model in a GCP bucket. Here you need to make sure to use the same format and version as expected by the prebuilt container. For instance, if you are using a XGBoost model, you need to make sure that the model is saved in the booster format and that the same version of `xgboost` is used. In this case we will be using the `xgboost-cpu.1-7` prebuilt container.
+1. **Upload model to Cloud Storage**: Store your trained model in a GCP bucket. Here you need to make sure to use the same format and version as expected by the prebuilt container.
+
+    For instance, if you are using a XGBoost model, you need to make sure that the model is saved in the booster format and that the same version of `xgboost` is used. In this case we will be using the `xgboost-cpu.1-7` prebuilt container.
 2. **Deploy with prebuilt container**: Use Vertex AI's prebuilt container for the model type (XGBoost in this case) and create a model version.
 
-```python	
-# use a gcp vertex prebuilt container 
-from google.cloud import aiplatform
+    ```python	
+    # use a gcp vertex prebuilt container 
+    from google.cloud import aiplatform
 
-model = aiplatform.Model.upload(
-    project=...,
-    location=...,
-    display_name=...,
-    serving_container_image_uri="us-docker.pkg.dev/vertex-ai/prediction/xgboost-cpu.1-7:latest",
-    parent_model=model_resource_name, # This allows us to upload this model as a new version of the existing model
-    artifact_uri=booster_model_uri, # GCS path to the model artifacts
-)
+    model = aiplatform.Model.upload(
+        project=...,
+        location=...,
+        display_name=...,
+        serving_container_image_uri="us-docker.pkg.dev/vertex-ai/prediction/xgboost-cpu.1-7:latest",
+        parent_model=model_resource_name, # This allows us to upload this model as a new version of the existing model
+        artifact_uri=booster_model_uri, # GCS path to the model artifacts
+    )
 
-... # Run a batch prediction job as previously described
-```
+    ... # Run a batch prediction job as previously described
+    ```
 
 ### Pros:
 
@@ -374,8 +378,20 @@ While this article focuses on Google Cloud Platform (GCP), it's important to not
 The right level of abstraction depends on your specific use case. For instance if you need to customize the prediction logic, you may opt for a custom prediction routine. If you need to deploy a model quickly and don’t require much customization, a prebuilt container may be the best choice.
 
 **Key takeaways:**
+- Custom Containers offer full control over the environment and runtime, but require more effort to set up and maintain.
 - Even though CPR provide full customization over the prediction logic, debugging may be harder than directly implementing a model server as the implementation details are offuscated.
 - Using a prebuilt container requires you to take extra care in ensuring that the model artifacts are compatible with the prebuilt container. However, the prediction output from the prebuilt container has the added benefit of being compatible with other GCP services such as explainability and monitoring.
 - Making the effort of matching your implementation output with the prebuilt container output can be a good idea in the long run. Having said that, there are scenarios in which this may not be possible, for instance due to no prebuilt image matching your library requirements. One example would be when implementing a model that requires a scikit-learn wrapper around an xgboost model.
 
 I hope this has been enlightening and that you now have a better understanding of the different levels of abstraction when deploying ML models. If you have any questions or feedback, feel free to reach out!
+
+# 9. Bonus: Tips and tricks
+
+- Activate logging when there are issues, this will help you debug in case something goes wrong. You can do this by adding the following snippet at the beginning of your script.
+    ```python	
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    ```
+    >**Note**: In case you want to do this in the FastAPI app, you would need to add this to the `app.py` file, as activating logging locally in your notebook would not have any effect.
+- In case of building an image multiple time due to debugging. Use the `--no-cache` flag when building the Docker image to ensure that the latest changes are included in the image. For the CPR you can set this trough the `no_cache` parameter in the `LocalModel.build_cpr_model` method.
+- In case your model is failing in the cloud, you can deploy it locally using the `LocalModel.deploy_to_local_endpoint` method. This will allow you to test the model locally and debug it before deploying it to the cloud. You can check the examples in the Jupyter Notebook for more details on how to do this for each of the alternatives.
