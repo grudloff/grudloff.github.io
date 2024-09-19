@@ -325,11 +325,11 @@ Each model type (e.g., TensorFlow, scikit-learn) has its own prebuilt container 
 
 - Less flexibility compared to custom containers or routines.
 - Limited to the model types supported by the prebuilt containers.
-- Debugging may be harder as the implementation details are not accessible. Therefore, you will need to rely only on logging and monitoring to debug the model.
+- Debugging may be harder as the implementation details are not accessible in an straightforward manner.
 
-# 6. Comparison of Abstraction Levels
+# 6. Comparison
 
-Here’s a quick comparison of the three abstraction levels:
+Here’s a quick comparison of the alternatives discussed in this article based on different criteria:
 
 | Feature                  | FastAPI Local | Docker Container Local | Vertex AI Custom Container | Vertex AI CPR | Vertex AI Prebuilt Container |
 |--------------------------|---------------|------------------------|----------------------------|---------------|------------------------------|
@@ -353,15 +353,21 @@ To help you get started with deploying your ML model, [here](https://github.com/
 8. Validate prediction concistency
 9. Clean Up
 
-This notebook provides code snippets, explanations, and commands to help you understand and execute each level described in this article.
+This notebook provides code snippets, explanations, and commands to help you understand and execute each level described in this article in full detail.
 
 # 8. Conclusion
 
-Choosing the right level of abstraction for your ML model deployment depends on your use case and the resources you have at your disposal. For small projects or prototypes, local deployment using Docker may suffice. However, for larger, production-level deployments, GCP’s Vertex AI offers scalable, managed solutions that allow you to focus more on your model and less on the infrastructure.
+Implementing ML model deployment from the ground up offers several key advantages:
+
+1. Deep Understanding: Building from scratch provides insight into each component's role and interaction.
+2. Troubleshooting Skills: Familiarity with lower-level implementations enhances debugging abilities across all abstraction levels.
+3. Customization: Lower-level knowledge enables fine-tuning of higher-level solutions when needed.
+4. Informed Decision-Making: Experience with different abstraction levels helps in choosing the right deployment strategy for each project.
+5. Vendor Flexibility: Starting with local implementations and Docker provides a foundation adaptable to various cloud providers or on-premises solutions.
+
+While cloud platforms offer convenient abstractions, the knowledge gained from lower-level implementations remains invaluable throughout your ML deployment journey.
 
 While this article focuses on Google Cloud Platform (GCP), it's important to note that other cloud providers such as AWS and Azure offer similar services for deploying machine learning models. The exercise of moving from low to high levels of abstraction is equivalent across these providers. For instance, AWS offers services like SageMaker for managed model deployment, and Azure provides Azure Machine Learning for similar capabilities. The principles and steps outlined here can be adapted to fit the offerings of any major cloud provider.
-
-The right level of abstraction depends on your specific use case. For instance if you need to customize the prediction logic, you may opt for a custom prediction routine. If you need to deploy a model quickly and don’t require much customization, a prebuilt container may be the best choice.
 
 **Key takeaways:**
 - Custom Containers offer full control over the environment and runtime, but require more effort to set up and maintain.
