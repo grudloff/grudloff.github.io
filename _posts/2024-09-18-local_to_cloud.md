@@ -385,6 +385,6 @@ I hope this has been enlightening and that you now have a better understanding o
     logging.basicConfig(level=logging.INFO)
     ```
     >**Note**: In case you want to do this in the FastAPI app, you would need to add this to the `app.py` file, as activating logging locally in your notebook would not have any effect.
-- In case of building an image multiple time due to debugging. Use the `--no-cache` flag when building the Docker image to ensure that the latest changes are included in the image. For the CPR you can set this trough the `no_cache` parameter in the `LocalModel.build_cpr_model` method.
+- When building an image multiple time due to debugging. Use the `--no-cache` flag when building the Docker image to ensure that the latest changes are included in the image. For the CPR you can set this trough the `no_cache` parameter in the `LocalModel.build_cpr_model` method.
 - In case your model is failing in the cloud, you can deploy it locally using the `LocalModel.deploy_to_local_endpoint` method. This will allow you to test the model locally and debug it before deploying it to the cloud. You can check the examples in the Jupyter Notebook for more details on how to do this for each of the alternatives.
 - You can inspect the files in a prebuilt container by running it locally with the above method. Once it is running you can access the container by running `docker exec -it <container_id> /bin/bash`. This will open a shell in the container and you can inspect the files and the environment.
