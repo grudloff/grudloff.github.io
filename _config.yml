@@ -69,7 +69,7 @@ author:
 #       url: "https://www.linkedin.com/in/gabriel-rudloff/"
 #     - label: "GitHub"
 #       icon: "fab fa-fw fa-github"
-#       url: "https://https://github.com/grudloff"
+#       url: "https://github.com/grudloff"
 
 footer:
   links:
@@ -78,7 +78,7 @@ footer:
       url: "https://www.linkedin.com/in/gabriel-rudloff/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://https://github.com/grudloff"
+      url: "https://github.com/grudloff"
 
 defaults:
   # _posts
