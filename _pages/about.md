@@ -28,5 +28,4 @@ Curiosity has always been my guiding principle. It’s driven me to explore, lea
 I’m always eager to collaborate, learn, and take on new opportunities in data science, machine learning, or cloud solutions. If you’re seeking a problem-solver with a passion for technology, let’s connect and explore how we can work together.
 
 
-
-If you are also curious about the picture in the header, I took it in beautiful Chile's Carretera Austral near Villa O'Higgins. The majestic specimen is a Coihue (Nothofagus Betuloides) growing at the edge of a lake.
+If you're wondering about the photo in the header, I captured it in stunning Carretera Austral near Villa O’Higgins, Chile. The magnificent tree is a Ñire (Nothofagus Antarctica), standing at the edge of a lake.
