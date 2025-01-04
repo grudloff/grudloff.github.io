@@ -1,13 +1,17 @@
 main:
   - title: "About"
     url: /about/
+#  - title: "Posts"
+#    url: /posts/
   - title: "Posts"
-    url: /posts/
-  - title: "CV"
-    url: /curriculum/
+    url: /blogs/
+  - title: "Portfolio"
   - title: "Publications"
     url: /categories/publications/
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
+    url: /links/
+  - title: "CV"
+    url: /curriculum/
+#  - title: "Categories"
+#    url: /categories/
+#  - title: "Tags"
+#    url: /tags/
