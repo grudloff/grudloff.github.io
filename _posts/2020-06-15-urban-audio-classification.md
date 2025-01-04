@@ -2,6 +2,7 @@
 title: "Urban Audio Classification"
 categories:
   - Blog
+  - Links
 link: https://github.com/grudloff/Salamon2017Replication
 ---
 
