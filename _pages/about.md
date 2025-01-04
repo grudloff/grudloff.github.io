@@ -2,7 +2,7 @@
 permalink: /about/
 title: "About"
 header:
-  image: /assets/images/header.jpg
+  image: /assets/images/header_small.jpg
 ---
 
 I’m Gabriel, a Machine Learning Engineer with a solid foundation in electronic engineering. During my master’s degree, I explored the fascinating intersection of machine learning and fiber optic sensors, developing innovative approaches to unconventional challenges. My journey has taken me from designing embedded systems to implementing cutting-edge AI solutions and supporting enterprise clients on Google Cloud’s services.
