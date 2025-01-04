@@ -1,7 +1,7 @@
 ---
 title: "Stock Market Forecasting"
 categories:
-  - Link
+  - Links
 tags:
   - link
 link: https://github.com/grudloff/stock_market_GAN
