@@ -1,6 +1,7 @@
 ---
 title: "Stock Market Forecasting"
 categories:
+  - Blog
   - Links
 tags:
   - link
