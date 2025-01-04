@@ -9,8 +9,8 @@ main:
     url: /categories/links/
   - title: "Publications"
     url: /categories/publications/
-  - title: "CV"
-    url: /curriculum/
+#  - title: "CV"
+#    url: /curriculum/
 #  - title: "Categories"
 #    url: /categories/
 #  - title: "Tags"
