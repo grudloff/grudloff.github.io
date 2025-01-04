@@ -6,9 +6,9 @@ main:
   - title: "Posts"
     url: /categories/blogs/
   - title: "Portfolio"
+    url: /categories/links/
   - title: "Publications"
     url: /categories/publications/
-    url: /links/
   - title: "CV"
     url: /curriculum/
 #  - title: "Categories"
