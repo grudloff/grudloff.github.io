@@ -2,6 +2,7 @@
 title: "Caixabank Data AI Hackathon submission"
 categories:
   - Blog
+  - Links
 tags:
   - link
 link: https://github.com/grudloff/hackathon-caixabank-data-ai-report
