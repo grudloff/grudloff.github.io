@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Gabriel Rudloff Barison
-email: gabriel.rudloff@gmail.com
+email: gabriel.rudloff.jb@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Gabriel Rudloff's personal page and portfolio.
 github_username: grudloff
@@ -60,7 +60,7 @@ author:
   bio    : "ML Engineer &#124; Data Scientist &#124; GCP Specialist"
   # location : Concón, Chile
   location : Barcelona, Spain
-  email : gabriel.rudloff@gmail.com
+  email : gabriel.rudloff.jb@gmail.com
   linkedin : gabriel-rudloff
   github : grudloff
 #   links:
